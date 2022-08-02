@@ -6,7 +6,10 @@ export const environment = {
   production: false,
 
   base_url: 'https://api.spotify.com/v1/',
+  
   client_id: 'e0933f436e744178b99ec1ebc2c97937',
+  client_secret: 'd07c0424f6db4f7f94cafc63c3d6877b',
+
   callback_uri: 'http://localhost:4200/callback'
 };
 
