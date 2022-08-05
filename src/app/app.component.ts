@@ -8,9 +8,12 @@ import { SpotifyService } from './spotify.service';
 })
 export class AppComponent {
   title = 'rutas';
+  isLoged = false;
 
   constructor(private _spotify: SpotifyService) {
-
+    if (sessionStorage.getItem('token')) {
+      this.isLoged = true;
+    }
   }
 
   authorization() {

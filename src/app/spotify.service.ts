@@ -56,4 +56,23 @@ export class SpotifyService {
   }
 
 
+  searchTrack(query: string) {
+
+    let token = JSON.parse(sessionStorage.getItem('token') || '{}')
+
+    let params: string = [
+      `q=${query}`,
+      `type=track`
+    ].join('&');
+
+    return this._http.get(`${environment.base_url}search?${params}`,
+      {
+        headers: {
+          'Authorization': `Bearer ${token.access_token}`
+        }
+      })
+  }
+
+
+
 }

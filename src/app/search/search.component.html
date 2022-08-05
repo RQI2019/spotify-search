@@ -1,1 +1,48 @@
-<p>search works!</p>
+<h1>Search</h1>
+
+<p>
+    <input type="text" #newquery [value]="query" (keydown.enter)="submit(newquery.value)">
+    <button class="btn btn-primary mx-2" (click)="submit(newquery.value)">Search</button>
+</p>
+
+
+<div *ngIf="results">
+
+    <div *ngIf="!results.length">
+        No se se encontrarons tracks con el termino '{{query}}'
+    </div>
+
+    <div *ngIf="results.length">
+        <h1>Results</h1>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col-sm-6 col-md-4" *ngFor="let t of results">
+                <div class="card">
+
+                    <img src="{{ t.album.images[0].url }}" class="img-fluid card-img-top">
+
+                    <div class="card-body">
+                        <span>
+                            <a [routerLink]="['/tracks', t.id]">
+                                <strong>nombre:</strong> {{ t.name }}
+                            </a>
+                        </span>
+                        <br>
+                        <span>
+                            <a [routerLink]="['/albums', t.album.id]">
+                                <strong>album:</strong> {{ t.album.name }}
+                            </a>
+                        </span>
+                    </div>
+                    <div class="card-footer ">
+                        <h3>
+                            <a [routerLink]="['/artists', t.artists[0].id]">
+                                {{ t.artists[0].name }}
+                            </a>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
