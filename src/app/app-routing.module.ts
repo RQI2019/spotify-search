@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductComponent } from './product/product.component';
 import { CallbackComponent } from './callback/callback.component';
 import { SearchComponent } from './search/search.component';
 import { ArtistComponent } from './artist/artist.component';
@@ -14,8 +13,6 @@ const routes: Routes = [
   { path: 'albums/:id', component: AlbumComponent },
   { path: 'tracks/:id', component: TrackComponent },
   { path: 'callback', component: CallbackComponent },
-
-  { path: 'product/:id', component: ProductComponent }
 ];
 
 @NgModule({

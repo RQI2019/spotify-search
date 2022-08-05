@@ -12,6 +12,7 @@ import { ArtistComponent } from './artist/artist.component';
 import { AlbumComponent } from './album/album.component';
 import { TrackComponent } from './track/track.component';
 import { CallbackComponent } from './callback/callback.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CallbackComponent } from './callback/callback.component';
     ArtistComponent,
     AlbumComponent,
     TrackComponent,
-    CallbackComponent
+    CallbackComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

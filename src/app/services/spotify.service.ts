@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -9,7 +10,6 @@ export class SpotifyService {
 
   constructor(private _http: HttpClient) { }
 
-
   // se genera la url de autorizacion
   getAuthorization() {
     let params =
@@ -17,9 +17,8 @@ export class SpotifyService {
       `client_id=${environment.client_id}&` +
       `scope=user-read-private&` +
       `redirect_uri=${environment.callback_uri}`
-    location.href = `https://accounts.spotify.com/authorize?` + params
+    location.href = `https://accounts.spotify.com/authorize?` + params;
   }
-
 
   // obtenes el token usando el codigo obtenido de la autorizacion usando httpclient
   getAccesToken(code: string) {
@@ -51,28 +50,36 @@ export class SpotifyService {
         'Authorization': `Basic ${btoa(environment.client_id + ':' + environment.client_secret)}`
       },
       body: data,
-    }).then(resp => resp.json())
+    }).then(resp => resp.json());
 
   }
 
-
-  searchTrack(query: string) {
+  query(URL: string, params?: Array<string>): Observable<any> {
 
     let token = JSON.parse(sessionStorage.getItem('token') || '{}')
+    let queryUrl = `${environment.base_url}${URL}`;
 
-    let params: string = [
-      `q=${query}`,
-      `type=track`
-    ].join('&');
+    if (params) {
+      queryUrl = `${queryUrl}?${params.join("&")}`
+    }
 
-    return this._http.get(`${environment.base_url}search?${params}`,
-      {
-        headers: {
-          'Authorization': `Bearer ${token.access_token}`
-        }
-      })
+    return this._http.get(queryUrl, {
+      headers: {
+        'Authorization': `Bearer ${token.access_token}`
+      }
+    });
   }
 
+  search(query: string, type: string) {
+    return this.query('search', [`q=${query}`, `type=${type}`]);
+  }
 
+  searchTrack(query: string) {
+    return this.search(query, 'track');
+  }
+
+  getTrack(id: string): Observable<any> {
+    return this.query(`tracks/${id}`);
+  }
 
 }

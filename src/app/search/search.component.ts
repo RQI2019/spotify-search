@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SpotifyService } from '../spotify.service';
+import { SpotifyService } from '../services/spotify.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -26,7 +26,6 @@ export class SearchComponent implements OnInit {
   }
 
   search() {
-    console.log('this.query', this.query)
     if (!this.query) {
       return;
     }
