@@ -82,4 +82,8 @@ export class SpotifyService {
     return this.query(`tracks/${id}`);
   }
 
+  getAlbum(id: string) {
+    return this.query(`albums/${id}`)
+  }
+
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../services/spotify.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import {Location} from '@angular/common'
 
 @Component({
   selector: 'app-track',
@@ -15,7 +16,9 @@ export class TrackComponent implements OnInit {
 
   constructor(
     private _spotify: SpotifyService,
-    private ar: ActivatedRoute
+    private ar: ActivatedRoute,
+    private router: Router,
+    private location: Location
   ) {
     this.ar.params.subscribe((params: any) => {
       this.id = params.id
@@ -40,7 +43,7 @@ export class TrackComponent implements OnInit {
   }
 
   back() {
-
+    this.location.back();
   }
 
 }
